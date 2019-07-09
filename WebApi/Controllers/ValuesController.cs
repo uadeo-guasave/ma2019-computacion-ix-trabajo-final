@@ -26,8 +26,9 @@ namespace WebApi.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult<string> Post([FromBody] string value)
         {
+            return $"valor devuelto desde post:{value}";
         }
 
         // PUT api/values/5

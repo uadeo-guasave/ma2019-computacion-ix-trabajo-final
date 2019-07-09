@@ -1,4 +1,5 @@
 using System;
+using System.Net;
 using Microsoft.EntityFrameworkCore;
 
 namespace WebApi.Models
@@ -21,8 +22,15 @@ namespace WebApi.Models
               );
               u.Property(ip => ip.LastLoginIp).HasConversion(
                   v => v.ToString(),
-                  v => (System.Net.IPAddress)System.Net.IPAddress.Parse(typeof(System.Net.IPAddress), v)
+                  v => (IPAddress)IPAddress.Parse(v)
               );
+              u.HasOne(r => r.Role).WithMany(p => p.Users);
+          });
+
+          modelBuilder.Entity<Role>(r => {
+              r.HasMany(u => u.Users).WithOne(o => o.Role);
+              r.HasIndex(n => n.Name).IsUnique();
+              r.HasIndex(l => l.Level).IsUnique();
           });
       }
   }

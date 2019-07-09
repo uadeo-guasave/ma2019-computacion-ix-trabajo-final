@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Net;
 
 namespace WebApi.Models
 {
@@ -34,7 +35,7 @@ namespace WebApi.Models
     [Required]
     public DateTime LastLogin { get; set; }
     [Required]
-    public System.Net.IPAddress LastLoginIp { get; set; }
+    public IPAddress LastLoginIp { get; set; }
   }
   public enum UserStatus
   {
